@@ -3,16 +3,17 @@
 # Version: A1
 # Author: Aaron Thomas (aathomas@protonmail.com)
 
-# Currently the dedicated server's game mechanics allow roaming and feral night hoards to despawn if everyone on the 
-# server logs off when the game's time is paused. When players log immediately back # into the server the hoards never 
+# Currently the dedicated server's game mechanics allow roaming and feral night hordes to despawn if everyone on the 
+# server logs off when the game's time is paused. When players log immediately back # into the server the hordes never 
 # respawn. Since the game is named 7 Days  to Die (I know – I know, 7 # days to die from the infection!) it doesn't sit 
-# right with me that my circle playing on my server can # # # conveniently despawn hordes and it happen quite often.
+# right with me that my circle playing on my server can # # # conveniently
+# despawn hordes and it happens quite often.
 # Well not anymore and now fully supported under 14.5! The following script is fully functional however is not in it's 
 # final stage. At the present time if all players leave the server # # # checks are made and if someone leaves on a 
 # horde night during the evening the game time resets to # # minutes before the event starts respawning the horde! 
 # If they log off again, it resets again -punishing!
 
-# The plan is to intergrate this script with another dynamic server backup script that # triggers when players login to
+# The plan is to integrate this script with another dynamic server backup script that # triggers when players login to
 # the server and handoff to this script so they only consume resources while people are using the server, possible create
 # a systemd service to monitor, or something else.
 
@@ -39,7 +40,7 @@ sleep 1
 expect "Total of 0 in the game"
 sleep 1
 
-# Check the server's day using the 7day's console command 'gt = gettime';
+# Check the server day using the 7days console command 'gt = gettime';
 send "gt\n"
 sleep 1
 
@@ -54,19 +55,21 @@ if {$found == 1} {
     puts "hour is $hour"
     puts "minute is $min"
 
-# Error message when no mathces are found; possible changes in the & day's console syntax;
+# Error message when no matches are found; possible changes in the & day's console syntax;
 } else {put "GOD AARON!\n"}
 sleep 1
 
-# The following checks to see if the day is divisible by seven and if the subsequent feral night hoard is supposed to spawn during the hours 22:00 pm to Midnight;
+# The following checks to see if the day is divisible by seven and if the subsequent feral night horde 
+# is supposed to spawn during the hours 22:00 pm to Midnight;
 if {$day % 7 == 0 && $hour >=22} {
-    send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
+    send_user "The world was abondoned on a horde night, time will now be reset to day $day, $hourfix:$minfix"
     send "st $day $hourfix $minfix\n"
 } else {
     send_user {[Day $day % 7 != 0] Not a horde night!\n}
 }
 
-# The following checks to see if the day is divisible by seven minus one and if the subsequent feral night hoard is supposed to spawn during the hours Midnight to 06:00 am;
+# The following checks to see if the day is divisible by seven minus one and if the subsequent feral night horde is 
+# supposed to spawn during the hours Midnight to 06:00 am;
 if {($day - 1) % 7 == 0 && $hour <= 05} {
     send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
     set day [expr {$day - 1}] 
