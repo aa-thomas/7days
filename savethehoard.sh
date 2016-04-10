@@ -3,7 +3,7 @@
 # Version: A1
 # Author: Aaron Thomas (aathomas@protonmail.com)
 
-#  Currently the dedicated server's game mechanics allow roaming and feral night hoards to despawn if # everyone on the 
+# Currently the dedicated server's game mechanics allow roaming and feral night hoards to despawn if everyone on the 
 # server logs off when the game's time is paused. When players log immediately back # into the server the hoards never 
 # respawn. Since the game is named 7 Days  to Die (I know – I know, 7 # days to die from the infection!) it doesn't sit 
 # right with me that my circle playing on my server can # # # conveniently despawn hordes and it happen quite often.
