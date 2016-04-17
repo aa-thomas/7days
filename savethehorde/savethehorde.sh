@@ -43,16 +43,16 @@ set finds [regexp {([0-9])} $check match pop]
 send_user "$check"
 if {$finds == 1} {
    puts "pop is $pop"
-   send_user "pop was set to $pop"
+   send_user "pop was set to $pop\n"
 } else {
     send_user "GOD AARON!\nSomething went wrong and the routine will abort!\n"
     break
 }
 
 if { $pop == 0 } {
-    send_user "Match found!"
+    send_user "Server population has reached zero continuing ...\n"
 } else {
-    send_user "No match found!"
+    send_user "Server population is higher than zero, aborting ...\n"
     break
 }
 
