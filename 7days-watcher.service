@@ -1,0 +1,13 @@
+[Unit]
+Description=7days Watcher Service
+After=network.target
+
+[Service]
+Type=simple
+User=7days
+ExecStart=/usr/bin/expect /home/7days/bin/sh/savethehoard.sh
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target
