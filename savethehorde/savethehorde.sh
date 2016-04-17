@@ -22,7 +22,7 @@ set timeout -1
 
 # variable for hour / minute for the 'settime' command for the 7 days to die consolei;
 set hourfix 21
-set minfix 50
+set minfix 00
 
 # Spawn password-less telnet session to the 7days to die console only allowing localhost connections;
 spawn telnet localhost 8081
