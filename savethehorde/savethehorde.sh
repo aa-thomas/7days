@@ -20,8 +20,8 @@
 set timeout -1
 
 # variable for hour / minute for the 'settime' command for the 7 days to die consolei;
-set hourfix 21
-set minfix 00
+set hourfix 22
+set minfix 45
 
 # Spawn password-less telnet session to the 7days to die console only allowing localhost connections;
 spawn telnet localhost 8081
@@ -88,7 +88,7 @@ if {$day % 7 == 0 && $hour >= 22} {
 
 # The following checks to see if the day is divisible by seven minus one and if the subsequent feral night horde is 
 # supposed to spawn during the hours Midnight to 06:00 am;
-if {($day - 1) % 7 == 0 && $hour >= 00 && $hour <= 05} {
+if {($day - 1) % 7 == 0 && $hour >= 00 && $hour < 06} {
     send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
     set day [expr {$day - 1}] 
     send "st $day $hourfix $minfix\n"
