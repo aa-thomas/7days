@@ -1,6 +1,5 @@
 #!/usr/bin/expect --
 
-# Version: A1
 # Author: Aaron Thomas (aathomas@protonmail.com)
 
 # Currently the dedicated server's game mechanics allow roaming and feral night hordes to despawn if everyone on the 
