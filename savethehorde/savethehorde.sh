@@ -37,7 +37,6 @@ send "lp\n"
 sleep 2
 
 expect -re "Total of (.*)"
-
 set check $expect_out(0,string)
 set finds [regexp {([0-9])} $check match pop]
 if {$finds == 1} {
@@ -54,7 +53,6 @@ if { $pop == 0 } {
     send_user "Server population is higher than zero, aborting ...\n"
     break
 }
-
 
 # Check the server day using the 7days console command 'gt = gettime';
 send "gt\n"
@@ -76,9 +74,6 @@ if {$found == 1} {
     send_user "GOD AARON!\nSomething went wrong variables were not assigned and the routine will abort!\n"
     break
 }
-
-
-sleep 1
 
 # The following checks to see if the day is divisible by seven and if the subsequent feral night horde 
 # is supposed to spawn during the hours 22:00 pm to Midnight;
