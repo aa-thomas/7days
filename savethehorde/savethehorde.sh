@@ -22,7 +22,7 @@ set timeout -1
 
 # variable for hour / minute for the 'settime' command for the 7 days to die consolei;
 set hourfix 21
-set minfix 59
+set minfix 50
 
 # Spawn password-less telnet session to the 7days to die console only allowing localhost connections;
 spawn telnet localhost 8081
@@ -46,16 +46,14 @@ if {$finds == 1} {
    send_user "pop was set to $pop"
 } else {
     send_user "GOD AARON!\nSomething went wrong and the routine will abort!\n"
-    exec [systemctl restart 7days-watcher.service]
-    exit 0
+    break
 }
 
 if { $pop == 0 } {
     send_user "Match found!"
 } else {
     send_user "No match found!"
-    exec [systemctl restart 7days-watcher.service]
-    exit 0
+    break
 }
 
 
@@ -77,7 +75,7 @@ if {$found == 1} {
 # Error message when no matches are found; possible changes in the & day's console syntax;
 } else {
     send_user "GOD AARON!\nSomething went wrong variables were not assigned and the routine will abort!\n"
-    exit 0
+    break
 }
 
 
@@ -88,12 +86,10 @@ sleep 1
 if {$day % 7 == 0 && $hour >=22} {
     send_user "The world was abondoned on a horde night, time will now be reset to day $day, $hourfix:$minfix"
     send "st $day $hourfix $minfix\n"
-    exec [systemctl restart 7days-watcher.service]
-    exit 0
+    break
 } else {
     send_user "Not a horde night!\n"
-    exec [systemctl restart 7days-watcher.service]
-    exit 0
+    break
 }
 
 # The following checks to see if the day is divisible by seven minus one and if the subsequent feral night horde is 
@@ -102,10 +98,8 @@ if {($day - 1) % 7 == 0 && $hour <= 05} {
     send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
     set day [expr {$day - 1}] 
     send "st $day $hourfix $minfix\n"
-    exec [systemctl restart 7days-watcher.service]
-    exit 0
+    break
 } else {
     send_user "Not a horde night!\n"
-    exec [systemctl restart 7days-watcher.service]
-    exit 0
+    break
 }
