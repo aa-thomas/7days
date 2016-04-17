@@ -83,7 +83,7 @@ sleep 1
 
 # The following checks to see if the day is divisible by seven and if the subsequent feral night horde 
 # is supposed to spawn during the hours 22:00 pm to Midnight;
-if {$day % 7 == 0 && $hour >=22} {
+if {$day % 7 == 0 && $hour >= 22} {
     send_user "The world was abondoned on a horde night, time will now be reset to day $day, $hourfix:$minfix"
     send "st $day $hourfix $minfix\n"
     break
