@@ -40,7 +40,6 @@ expect -re "Total of (.*)"
 
 set check $expect_out(0,string)
 set finds [regexp {([0-9])} $check match pop]
-send_user "$check"
 if {$finds == 1} {
    puts "pop is $pop"
    send_user "pop was set to $pop\n"
