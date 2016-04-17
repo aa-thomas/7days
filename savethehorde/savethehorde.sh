@@ -1,5 +1,3 @@
-<<<<<<< HEAD:savethehoard.sh
-=======
 #!/usr/bin/expect --
 
 # Version: A1
@@ -20,7 +18,7 @@
 # a systemd service to monitor, or something else.
 
 # 24 hour timeout;
-set timeout 86400
+set timeout -1
 
 # variable for hour / minute for the 'settime' command for the 7 days to die consolei;
 set hourfix 21
@@ -36,11 +34,30 @@ sleep 1
 
 # List current players active on the server; 7day's console command 'lp = listplayers';
 send "lp\n"
-sleep 1
+sleep 2
 
-# Expect statement looking for an empty world;
-expect "Total of 0 in the game"
-sleep 1
+expect -re "Total of (.*)"
+
+set check $expect_out(0,string)
+set finds [regexp {([0-9])} $check match pop]
+send_user "$check"
+if {$finds == 1} {
+   puts "pop is $pop"
+   send_user "pop was set to $pop"
+} else {
+    send_user "GOD AARON!\nSomething went wrong and the routine will abort!\n"
+    exec [systemctl restart 7days-watcher.service]
+    exit 0
+}
+
+if { $pop == 0 } {
+    send_user "Match found!"
+} else {
+    send_user "No match found!"
+    exec [systemctl restart 7days-watcher.service]
+    exit 0
+}
+
 
 # Check the server day using the 7days console command 'gt = gettime';
 send "gt\n"
@@ -50,15 +67,20 @@ sleep 1
 # The captured string is stored in the $expect_out(buffer) and a regular expression search is performed
 # with the results stored as variables for additional logic checks;
 expect -re "Day (.*)(.*)"
-set string $expect_out(0,string)
-set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $string match day hour min] 
+set time $expect_out(0,string)
+set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match day hour min] 
 if {$found == 1} {
     puts "day is $day"
     puts "hour is $hour"
     puts "minute is $min"
 
 # Error message when no matches are found; possible changes in the & day's console syntax;
-} else {put "GOD AARON!\n"}
+} else {
+    send_user "GOD AARON!\nSomething went wrong variables were not assigned and the routine will abort!\n"
+    exit 0
+}
+
+
 sleep 1
 
 # The following checks to see if the day is divisible by seven and if the subsequent feral night horde 
@@ -66,8 +88,12 @@ sleep 1
 if {$day % 7 == 0 && $hour >=22} {
     send_user "The world was abondoned on a horde night, time will now be reset to day $day, $hourfix:$minfix"
     send "st $day $hourfix $minfix\n"
+    exec [systemctl restart 7days-watcher.service]
+    exit 0
 } else {
-    send_user {[Day $day % 7 != 0] Not a horde night!\n}
+    send_user "Not a horde night!\n"
+    exec [systemctl restart 7days-watcher.service]
+    exit 0
 }
 
 # The following checks to see if the day is divisible by seven minus one and if the subsequent feral night horde is 
@@ -76,7 +102,10 @@ if {($day - 1) % 7 == 0 && $hour <= 05} {
     send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
     set day [expr {$day - 1}] 
     send "st $day $hourfix $minfix\n"
+    exec [systemctl restart 7days-watcher.service]
+    exit 0
 } else {
-    send_user {[Day $day % 7 != 0] Not a horde night!\n}
+    send_user "Not a horde night!\n"
+    exec [systemctl restart 7days-watcher.service]
+    exit 0
 }
->>>>>>> 69bd932758f85e3c90602903f6d0627feb9496b5:savethehorde/savethehorde.sh
