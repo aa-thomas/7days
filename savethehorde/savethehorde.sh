@@ -1,6 +1,5 @@
 #!/usr/bin/expect --
 
-# Version: A1
 # Author: Aaron Thomas (aathomas@protonmail.com)
 
 # Currently the dedicated server's game mechanics allow roaming and feral night hordes to despawn if everyone on the 
@@ -22,7 +21,7 @@ set timeout -1
 
 # variable for hour / minute for the 'settime' command for the 7 days to die consolei;
 set hourfix 21
-set minfix 50
+set minfix 45
 
 # Spawn password-less telnet session to the 7days to die console only allowing localhost connections;
 spawn telnet localhost 8081
@@ -37,25 +36,22 @@ send "lp\n"
 sleep 2
 
 expect -re "Total of (.*)"
-
 set check $expect_out(0,string)
 set finds [regexp {([0-9])} $check match pop]
-send_user "$check"
 if {$finds == 1} {
    puts "pop is $pop"
-   send_user "pop was set to $pop"
+   send_user "pop was set to $pop\n"
 } else {
     send_user "GOD AARON!\nSomething went wrong and the routine will abort!\n"
     break
 }
 
 if { $pop == 0 } {
-    send_user "Match found!"
+    send_user "Server population has reached zero continuing ...\n"
 } else {
-    send_user "No match found!"
+    send_user "Server population is higher than zero, aborting ...\n"
     break
 }
-
 
 # Check the server day using the 7days console command 'gt = gettime';
 send "gt\n"
@@ -78,26 +74,26 @@ if {$found == 1} {
     break
 }
 
-
-sleep 1
-
 # The following checks to see if the day is divisible by seven and if the subsequent feral night horde 
 # is supposed to spawn during the hours 22:00 pm to Midnight;
-if {$day % 7 == 0 && $hour >=22} {
+if {$day % 7 == 0 && $hour >= 22} {
     send_user "The world was abondoned on a horde night, time will now be reset to day $day, $hourfix:$minfix"
     send "st $day $hourfix $minfix\n"
+    sleep 1
+    send "sa\r"
     break
 } else {
     send_user "Not a horde night!\n"
-    break
 }
 
 # The following checks to see if the day is divisible by seven minus one and if the subsequent feral night horde is 
 # supposed to spawn during the hours Midnight to 06:00 am;
-if {($day - 1) % 7 == 0 && $hour <= 05} {
+if {($day - 1) % 7 == 0 && $hour >= 00 && $hour < 06} {
     send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
     set day [expr {$day - 1}] 
     send "st $day $hourfix $minfix\n"
+    sleep 1
+    send "sa\r"
     break
 } else {
     send_user "Not a horde night!\n"

@@ -4,8 +4,13 @@ After=network.target
 
 [Service]
 Type=simple
+<<<<<<< HEAD
 User=7days
 ExecStart=/usr/bin/expect /home/7days/bin/sh/savethehorde.sh
+=======
+User=$USER
+ExecStart=/usr/bin/expect /home/$USER/bin/sh/savethehorde.sh
+>>>>>>> f549c1e3aa00beb19907d7e4ce1642d2fd0a75d9
 Restart=on-failure
 
 
