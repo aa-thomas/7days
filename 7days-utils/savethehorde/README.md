@@ -41,11 +41,13 @@ Fixed: Feral night horde day wraps correctly.
 
 Interesting enough it still seems that the below alpha 14.4 reported fix doesn’t work properly when 
 it comes to the 7th Day horde. Bug request pending, however savethehorde fixes this issue by resetting
-the day back to slightly before the night time triggers and then saves the world time which resolves the issue.
+the day back to slightly before the night time triggers and then saves the world time which resolves
+the issue.
 
 Alpha: 14.4
 ...
-Fixed: If players logout during horde, horde zombies are not saved but the horde will spawn again as soon as someone joins.
+Fixed: If players logout during horde, horde zombies are not saved but the horde will spawn again as
+soon as someone joins.
 …
 
 More to come ...
