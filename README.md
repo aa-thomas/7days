@@ -7,8 +7,7 @@ Collection of server-side utilities to administrate, enhance and extend 7 Days t
  
 **Tools Available**
    - savethehorde
-     - Saves the game progress during the 7th night so logging out doesn't reset
-       the difficulty
+     - Saves the night hoard event during the 7th night blood moon so logging out doesn't remove the spawned mobs 
 
 **Requirements**
    - expect (tested on 5.45 or higher)
