@@ -4,15 +4,15 @@ Saves server status and horde activity if all players log out on 7th night
 
 **Usage**
 ======== 
-   -Run this on the local Linux distro hosting a dedicated 7 Days server with systemd managing system services. 
+   - Run this on the local Linux distro hosting a dedicated 7 Days server with systemd managing system services. 
 
 **Assumptions**
 =============
-   -User = 7days
+   - User = 7days
 
-   -Application script directory = /home/7days/7days-utils/
+   - Application script directory = /home/7days/7days-utils/
 
-   -Systemd service location = /etc/systemd/system/7days-watcher.service
+   - Systemd service location = /etc/systemd/system/7days-watcher.service
 
 ```
 Hoard monitoring is currently tested and working on a dedicated MP Survival on alpha 14.5 running on virtualized Linux (x86_64 Fedora 23). The savethehorde application interfaces with the 7 Day to Die game console using expect to monitor specific behavior to ensure game mechanics integrity by triggering time adjustments to ensure blood moon horde spawns occurs. 
