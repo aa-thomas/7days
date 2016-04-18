@@ -14,6 +14,7 @@ Saves server status and horde activity if all players log out on 7th night
 
    - Systemd service location = /etc/systemd/system/7days-watcher.service
 
+   - Night hours are 22:00 to 06:00
 ```
 Hoard monitoring is currently tested and working on a dedicated MP Survival on alpha 14.5
 running on virtualized Linux (x86_64 Fedora 23). The savethehorde application interfaces with
@@ -52,3 +53,6 @@ soon as someone joins.
 
 More to come ...
 
+To do:
+
+   - Modifications to accept arguments to change the night times to user defined values definable in the systemd service
