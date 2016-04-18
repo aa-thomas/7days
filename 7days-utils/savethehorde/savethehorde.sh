@@ -63,7 +63,7 @@ set finds [regexp {([0-9])} $check match pop]
        break
 }
 
-   if { $pop == 0 } {
+   if {$pop == 0} {
 
        send_user "Server population has reached zero continuing ...\n"
 
