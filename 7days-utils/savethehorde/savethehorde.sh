@@ -154,7 +154,7 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
 
    } else {
 
-       send_user "Not a horde night!\n"
+       send_user "SaveTheHorde Log: Not a horde night!\n"
 }
 
 # The following checks to see if the day is divisible by seven minus one and if the subsequent feral night horde is 
