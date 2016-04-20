@@ -50,28 +50,40 @@ expect -re "Total of (.*)"
 
 set check $expect_out(0,string)
 
-set finds [regexp {([0-9])} $check match pop]
+set finds [regexp {([0-9])} $check match population]
 
    if {$finds == 1} {
 
-      puts "pop is $pop"
+      puts "population is $population"
 
-      send_user "pop was set to $pop\n"
+      send_user "SaveTheHorde Log: pop was set to $population\n"
 
    } else {
 
-       send_user "GOD AARON!\nSomething went wrong and the routine will abort!\n"
+       send_user "SaveTheHorde Log: Something went wrong and the routine will abort!\n"
+
+       sleep 1
+
+       send "exit\r"
+
+       sleep 1
 
        break
 }
 
-   if {$pop == 0} {
+   if {$population == 0} {
 
-       send_user "Server population has reached zero continuing ...\n"
+       send_user "SaveTheHorde Log: Server population has reached zero continuing!\n"
 
    } else {
 
-       send_user "Server population is higher than zero, aborting ...\n"
+       send_user "SaveTheHorde Log: Server population is higher than zero, aborting!\n"
+
+       sleep 1
+
+       send "exit\r"
+
+       sleep 1
 
        break
 }
@@ -103,9 +115,16 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
 # Error message when no matches are found; possible changes in the & day's console syntax;
    } else {
 
-       send_user "GOD AARON!\nSomething went wrong variables were not assigned and the routine will abort!\n"
+       send_user "SaveTheHorde Log: Something went wrong variables were not assigned and the routine will abort!\n"
+
+       sleep 1
+
+       send "exit\r"
+
+       sleep 1
 
        break
+
 }
 
 # The following checks to see if the day is divisible by seven and if the subsequent feral night horde 
@@ -113,17 +132,23 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
 
    if {$day % 7 == 0 && $hour >= 22} {
 
-       send_user "The world was abondoned on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
+       send_user "SaveTheHorde Log: The world was abondoned on a horde night, time will now be reset to Day $day, $hourfix:$minfix\n"
 
-       send "st $bigbang\n"
-    
+       send "st $bigbang\r"
+
        sleep 1
 
-       send "st $day $hourfix $minfix\n"
+       send "st $day $hourfix $minfix\r"
 
        sleep 1
 
        send "sa\r"
+
+       sleep 1
+
+       send "exit\r"
+
+       sleep 1
 
        break
 
@@ -138,10 +163,10 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
 
        set day [expr {$day - 1}] 
 
-       send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
+       send_user "SaveTheHorde Log: The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix\n"
 
-       send "st $bigbang\n"
-    
+       send "st $bigbang\r"
+
        sleep 1
 
        send "st $day $hourfix $minfix\n"
@@ -150,11 +175,28 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
 
        send "sa\r"
 
+       sleep 1
+
+       send "exit\r"
+
+       sleep 1
+
+       break
+
+       send "sa\r"
+
        break
 
    } else {
 
-       send_user "Not a horde night!\n"
+       send_user "SaveTheHorde Log: Not a horde night!\n"
+
+       sleep 1
+
+       send "exit\r"
+
+       sleep 1
 
        break
+       
 }
