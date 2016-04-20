@@ -24,7 +24,9 @@ set timeout -1
 
 set hourfix 21
 
-set minfix 45
+set minfix 59
+
+set bigbang "01 07 00"
 
 # Spawn password-less telnet session to the 7days to die console only allowing localhost connections;
 
@@ -113,6 +115,10 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
 
        send_user "The world was abondoned on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
 
+       send "st $bigbang\n"
+    
+       sleep 1
+
        send "st $day $hourfix $minfix\n"
 
        sleep 1
@@ -133,6 +139,10 @@ set found [regexp -all { ([0-9][0-9]), ([0-9][0-9]):([0-9][0-9])} $time match da
        set day [expr {$day - 1}] 
 
        send_user "The world was abondon on a horde night, time will now be reset to Day $day, $hourfix:$minfix"
+
+       send "st $bigbang\n"
+    
+       sleep 1
 
        send "st $day $hourfix $minfix\n"
 
